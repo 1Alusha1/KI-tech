@@ -36,11 +36,28 @@ const EmailLink = styled.a`
     cursor: pointer;
     text-decoration: none;
   }
+
+  @media (max-width: 425px) {
+    & {
+      font-size: 18px;
+      span {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 425px) {
+    & {
+      font-size: 16px;
+    }
+  }
 `;
 
 const Contact = () => {
   return (
-    <GradientBackground style={{ textAlign: "center" }} id="contact">
+    <GradientBackground
+      style={{ textAlign: "center", marginBottom: "40px" }}
+      id="contact"
+    >
       <Headline>
         Want to create something <Highlight>awesome?</Highlight>
         <span style={{ display: "block" }}>Drop me an email.</span>

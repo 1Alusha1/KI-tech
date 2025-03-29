@@ -14,7 +14,7 @@ const HeaderElem = styled.header`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 3;
   margin: 0;
   width: 100%;
 
@@ -26,6 +26,31 @@ const HeaderElem = styled.header`
       : css`
           background: #00000036;
         `}
+
+  @media (max-width: 1024px) {
+    max-width: 768px;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 0px;
+    height: ${({ burger }) => burger && "100%"};
+    ${({ burger }) =>
+      burger &&
+      css`
+        &::before {
+          position: absolute;
+          content: "";
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(99, 27, 27, 0);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.15);
+          z-index: 1;
+        }
+      `}
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -33,6 +58,11 @@ const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${({ burger }) => burger && "20px"};
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -49,6 +79,10 @@ const Logo = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    z-index: 3;
   }
 `;
 
@@ -79,9 +113,24 @@ const List = styled.ul`
   gap: 2rem;
   margin: 0;
   padding: 0;
+  z-index: 3;
 
   @media (max-width: 768px) {
-    gap: 1rem;
+    flex-direction: column;
+    gap: 20px;
+
+    ${({ burger }) =>
+      burger
+        ? css`
+            height: 200px;
+            transition: 0.5s;
+            overflow: hidden;
+          `
+        : css`
+            height: 0px;
+            transition: 0.5s;
+            overflow: hidden;
+          `}
   }
 `;
 
@@ -112,6 +161,7 @@ const GetStartedButton = styled.button`
   letter-spacing: 1px;
   position: relative; /* Для создания анимации */
   overflow: hidden; /* Чтобы градиент не выходил за пределы кнопки */
+  z-index: 3;
   ${({ theme }) =>
     theme === "light"
       ? css`
@@ -145,11 +195,16 @@ const GetStartedButton = styled.button`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 768px) {
+    display: ${({ burger }) => (burger ? "block" : "none")};
+  }
 `;
 
 const Header = () => {
-  const { theme } = generalStore();
+  const { theme, burger, toggleMenu } = generalStore();
   const scrollToSection = (section) => {
+    toggleMenu();
     const targetElement = document.getElementById(section);
     if (targetElement) {
       window.scrollTo({
@@ -160,7 +215,7 @@ const Header = () => {
   };
 
   return (
-    <HeaderElem id="home" theme={theme}>
+    <HeaderElem id="home" theme={theme} burger={burger}>
       <HeaderContent>
         <LogoContainer>
           <Logo onClick={() => scrollToSection("home")}>
@@ -168,14 +223,15 @@ const Header = () => {
           </Logo>
         </LogoContainer>
         <Nav theme={theme}>
-          <List>
+          <List burger={burger}>
             <Li onClick={() => scrollToSection("works")}>Work</Li>
             <Li onClick={() => scrollToSection("about")}>About</Li>
             <Li onClick={() => scrollToSection("contact")}>Contact</Li>
           </List>
         </Nav>
-
-        <GetStartedButton theme={theme}>Get Started</GetStartedButton>
+        <GetStartedButton theme={theme} burger={burger}>
+          Get Started
+        </GetStartedButton>
       </HeaderContent>
     </HeaderElem>
   );

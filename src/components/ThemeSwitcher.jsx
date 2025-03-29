@@ -21,17 +21,31 @@ const SwitchButton = styled.button`
   &:hover {
     transform: scale(1.1);
   }
+
+  @media (max-width: 768px) {
+    top: 13px;
+  }
+  @media (max-width: 425px) {
+    top: 20px;
+    width: 35px;
+    height: 35px;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
 `;
 
 const ThemeSwitcher = () => {
-  const { theme, setStore } = generalStore();
+  const { theme, switchTheme } = generalStore();
 
   const changeTheme = () => {
     if (theme === "dark") {
-      setStore("light");
+      switchTheme("light");
       return (window.document.body.style.background = "#fff");
     }
-    setStore("dark");
+    switchTheme("dark");
     return (window.document.body.style.background = "var(--dark-bg-primary)");
   };
 

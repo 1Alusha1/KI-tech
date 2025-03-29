@@ -74,13 +74,13 @@ const TitleWrapper = styled.div`
     margin-right: 10px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     & {
       gap: 0;
       align-items: normal;
     }
     h2 {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 `;

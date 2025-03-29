@@ -3,8 +3,7 @@ import generalStore from "../store/store";
 
 const FooterE = styled.footer`
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 20px;
+  justify-content: center;
 
   ul {
     display: flex;
@@ -20,11 +19,8 @@ const FooterE = styled.footer`
   }
 
   @media (max-width: 768px) {
-    & {
-      flex-direction: column;
-    }
     ul {
-      flex-direction: column;
+      padding-bottom: 20px;
       text-align: center;
     }
   }
@@ -49,11 +45,6 @@ const Footer = () => {
         <li onClick={() => scrollToSection("works")}>Work</li>
         <li onClick={() => scrollToSection("about")}>About</li>
         <li onClick={() => scrollToSection("contact")}>Contact</li>
-      </ul>
-      <ul>
-        <li>Twitter</li>
-        <li>Instagram</li>
-        <li>LinkedIn</li>
       </ul>
     </FooterE>
   );

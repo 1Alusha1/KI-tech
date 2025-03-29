@@ -39,12 +39,10 @@ const glow = keyframes`
 
 export const GradientBackground = styled.div`
   position: relative;
-  padding: 50px;
   width: 90%;
-  max-width: 1200px;
-  height: 65vh;
+  padding: 20px;
   border-radius: 30px;
-  margin: 30px auto;
+  margin: 0 auto;
   overflow: hidden;
   background: linear-gradient(
     -45deg,
@@ -80,27 +78,50 @@ export const GradientBackground = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-align: center;
-  padding: 2rem;
-  z-index: 2;
+  padding: 10px;
+  height: 100%;
 `;
 
 export const Headline = styled.div`
-  font-size: 5rem;
+  display: block;
+  margin-bottom: 10px;
+  margin: 0 auto;
+  width: 46%;
+  font-size: 4rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 1rem;
   line-height: 1.1;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1024px) {
+    & {
+      width: 50%;
+      font-size: 48px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      width: 100%;
+    }
+  }
+  @media (max-width: 425px) {
+    & {
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+  }
+  @media (max-width: 320px) {
+    & {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+  }
 `;
 
 export const Highlight = styled.span`
@@ -108,17 +129,36 @@ export const Highlight = styled.span`
 `;
 
 export const Tagline = styled.div`
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 50%;
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    & {
+      width: 100%;
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 425px) {
+    & {
+      width: 100%;
+      font-size: 10px;
+    }
+  }
 `;
 
 export const ActionButtons = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
   justify-content: center;
+
+  @media (max-width: 320px) {
+    & {
+      gap: 10px;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -138,11 +178,25 @@ const Button = styled.button`
 const LightButton = styled(Button)`
   background-color: white;
   color: #333;
+
+  @media (max-width: 320px) {
+    & {
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const DarkButton = styled(Button)`
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
+
+  @media (max-width: 320px) {
+    & {
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
 `;
 
 const HeroContaier = styled.div`
@@ -166,28 +220,6 @@ const scrollAnimation = keyframes`
   }
   0%{
     transform: translateY(0);
-  }
-`;
-
-const Header1 = styled.h1`
-  width: 80%;
-  font-size: 64px;
-  font-family: "Noto Sans Mono", monospace;
-  font-weight: 400;
-
-  span.blue {
-    font-family: "Noto Sans Mono", monospace;
-    font-weight: 400;
-    color: #2893eb;
-  }
-
-  span {
-    color: #757575;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 32px;
-    width: 100%;
   }
 `;
 
@@ -362,19 +394,13 @@ const Hero = () => {
             <GradientBackground>
               <ContentWrapper>
                 <Headline>
-                  We <Highlight>will</Highlight> create
-                  <br />
-                  any automation
-                  <br />
-                  for <Highlight>you</Highlight>
-                  <br />
+                  We <Highlight>will</Highlight> create any automation for{" "}
+                  <Highlight>you</Highlight>
                 </Headline>
                 <Tagline>
                   <b>
                     That <Highlight>save your time and improve</Highlight> the
-                    quality of your bussiness operation
-                    <br />
-                    Ki-Tech
+                    quality of your bussiness operation Ki-Tech
                   </b>
                 </Tagline>
                 <ActionButtons>

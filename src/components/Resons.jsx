@@ -70,12 +70,12 @@ const TitleWrapper = styled.div`
     margin-right: 10px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     gap: 0;
     align-items: normal;
 
     h2 {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 `;
@@ -130,7 +130,7 @@ const accItems = [
   },
   {
     icon: <CodeIcon />,
-    title: "No Need for Detailed Technical Specifications",
+    title: "Optional",
     text: `With my extensive experience, I can easily convert your
                   requests into results, without requiring extensive technical
                   documentation. I understand how to get things done with
@@ -176,7 +176,10 @@ const Reason = () => {
                   isOpen={i === openIndex}
                   contentHeight={contentRefs.current[i]?.scrollHeight || "auto"}
                 >
-                  <Paragraph ref={(el) => (contentRefs.current[i] = el)}>
+                  <Paragraph
+                    style={{ paddingTop: "10px" }}
+                    ref={(el) => (contentRefs.current[i] = el)}
+                  >
                     {item.text}
                   </Paragraph>
                 </ReasonContent>
