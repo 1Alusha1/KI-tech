@@ -204,7 +204,9 @@ const GetStartedButton = styled.button`
 const Header = () => {
   const { theme, burger, toggleMenu } = generalStore();
   const scrollToSection = (section) => {
-    toggleMenu();
+    if (section !== "home") {
+      toggleMenu();
+    }
     const targetElement = document.getElementById(section);
     if (targetElement) {
       window.scrollTo({
