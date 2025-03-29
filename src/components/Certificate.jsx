@@ -3,6 +3,7 @@ import { certificates } from "../assets/img";
 import { Header2 } from "./About";
 import { motion } from "framer-motion";
 import { Container } from "../App";
+import generalStore from "../store/store";
 
 const CertificateContainer = styled.div`
   padding: 100px 0;
@@ -17,6 +18,9 @@ const CertificateList = styled.ul`
   padding-top: 20px;
   width: 100%;
 
+  li{
+    list-style: none;
+  }
   img {
     width: 240px;
     height: auto;
@@ -30,9 +34,11 @@ const CertificateList = styled.ul`
   }
 `;
 
-const CertificateWrapper = styled.div``;
+const CertificateWrapper = styled.div`
+`;
 
 const Certificate = () => {
+  const { theme } = generalStore();
   return (
     <CertificateContainer>
       <motion.div
@@ -43,7 +49,7 @@ const Certificate = () => {
       >
         <CertificateWrapper>
           <Container>
-            <Header2 style={{ paddingBottom: "100px" }}>
+            <Header2 style={{ paddingBottom: "100px" }} theme={theme}>
               Certificates
             </Header2>
 

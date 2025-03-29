@@ -2,6 +2,148 @@ import { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Container } from "../App";
 import MouseIcon from "./icons/MouseIcon";
+import React from "react";
+
+const gradient = keyframes`
+  0% {
+    background-position: 0% 25%;
+  }
+  25% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 0% 25%;
+  }
+`;
+
+const glow = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(238, 119, 82, 0.6);
+  }
+  25% {
+    box-shadow: 0 0 40px rgba(231, 60, 126, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(156, 39, 176, 0.8);
+  }
+  75% {
+    box-shadow: 0 0 40px rgba(35, 166, 213, 0.7);
+  }
+`;
+
+export const GradientBackground = styled.div`
+  position: relative;
+  padding: 50px;
+  width: 90%;
+  max-width: 1200px;
+  height: 65vh;
+  border-radius: 30px;
+  margin: 30px auto;
+  overflow: hidden;
+  background: linear-gradient(
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #9c27b0,
+    #23a6d5,
+    #23d5ab,
+    #8bc34a,
+    #ee7752,
+    #e73c7e,
+    #9c27b0,
+    #23a6d5,
+    #23d5ab,
+    #8bc34a
+  );
+  background-size: 200% 200%;
+  animation: ${gradient} 20s ease infinite, ${glow} 20s ease infinite;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(20px);
+    opacity: 0.7;
+    z-index: -1;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 2;
+`;
+
+export const Headline = styled.div`
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const Highlight = styled.span`
+  color: #673ab7;
+`;
+
+export const Tagline = styled.div`
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+`;
+
+export const ActionButtons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+`;
+
+const Button = styled.button`
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const LightButton = styled(Button)`
+  background-color: white;
+  color: #333;
+`;
+
+const DarkButton = styled(Button)`
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+`;
 
 const HeroContaier = styled.div`
   position: relative;
@@ -217,11 +359,32 @@ const Hero = () => {
         />
         <HeroContaier>
           <Container>
-            <Header1 className="content">
-              I will create <span className="blue">any automation </span> that
-              will <span className="blue">save your time and improve</span> the
-              quality of your bussiness operation
-            </Header1>
+            <GradientBackground>
+              <ContentWrapper>
+                <Headline>
+                  We <Highlight>will</Highlight> create
+                  <br />
+                  any automation
+                  <br />
+                  for <Highlight>you</Highlight>
+                  <br />
+                </Headline>
+                <Tagline>
+                  <b>
+                    That <Highlight>save your time and improve</Highlight> the
+                    quality of your bussiness operation
+                    <br />
+                    Ki-Tech
+                  </b>
+                </Tagline>
+                <ActionButtons>
+                  <LightButton>
+                    Get your AI implementation plan in 24h
+                  </LightButton>
+                  <DarkButton>Schedule Your AI Readiness Assessment</DarkButton>
+                </ActionButtons>
+              </ContentWrapper>
+            </GradientBackground>
             <IconContainerCenter>
               <MouseIcon
                 height={40}

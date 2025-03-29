@@ -1,17 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
-/* .inter-<uniquifier> {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: <weight>;
-    font-style: normal;
-  } */
 
-/* .krona-one-regular {
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  } */
+:root {
+  /* Светлая тема (по умолчанию) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --accent-color: #a53d8e;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  --dark-bg-primary: #121212;
+  --dark-bg-secondary: #1e1e1e;
+  --dark-text-primary: #f1f5f9;
+  --dark-text-secondary: #a1a1aa;
+  --dark-accent-color: #a53d8e;
+  --dark-border-color: #2d3748;
+  --dark-card-bg: #1e1e1e;
+  --dark-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
 
 * {
   margin: 0;
@@ -19,6 +29,121 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
   letter-spacing: 0.6px;
+}
+
+html {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Krona One", sans-serif;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Стиль для переключателя темы */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Стили для текста */
+.headline {
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.highlight {
+  color: #ff9d40;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+/* Стили для кнопок */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-light {
+  background-color: white;
+  color: #333;
+}
+
+.btn-dark {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

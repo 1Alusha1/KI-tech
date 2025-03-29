@@ -4,6 +4,7 @@ import { Container } from "../App";
 
 import Certificate from "./Certificate";
 import ApisExp from "./ApisExp";
+import generalStore from "../store/store";
 
 const AboutSection = styled.div`
   display: flex;
@@ -24,6 +25,8 @@ const Content = styled.div`
 export const Paragraph = styled.p`
   margin-bottom: 32px;
   letter-spacing: 3px;
+  color: ${({ theme }) =>
+    theme === "dark" ? "var(--dark-text-primary)" : "var(--text-primary)"};
 `;
 
 export const Header2 = styled.h2`
@@ -31,7 +34,9 @@ export const Header2 = styled.h2`
   font-size: 30px;
   font-weight: 400;
   font-family: "Krona One", sans-serif;
-
+  color: ${({ theme }) =>
+    theme === "dark" ? "var(--dark-text-primary)" : "var(--text-primary)"};
+    
   span {
     color: #dfc7b1;
   }
@@ -86,12 +91,14 @@ const Wrapper = styled.div`
 `;
 
 const About = () => {
+  const { theme } = generalStore();
+
   return (
     <AboutSection id="about">
       {/* About me */}
       <Container>
-        <Wrapper>
-          <Header2>About me</Header2>
+        <Wrapper theme={theme}>
+          <Header2 theme={theme}>About me</Header2>
           <Content>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -99,7 +106,7 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <Paragraph>
+              <Paragraph theme={theme}>
                 My journey in this field began a few years ago when I worked as
                 a C# developer and became fascinated with process optimization
                 using Selenium.
@@ -112,7 +119,7 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <Paragraph>
+              <Paragraph theme={theme}>
                 However, everything changed when I encountered a problem with a
                 friend who was running a small online store. He was spending too
                 much time manually setting up marketing funnels, newsletters,
@@ -127,7 +134,7 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <Paragraph>
+              <Paragraph theme={theme}>
                 I started learning marketing automation tools like Zapier,
                 Make.com, HubSpot, and others. With each new project, I honed my
                 skills and discovered faster and more effective ways to solve
@@ -143,7 +150,7 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <Paragraph>
+              <Paragraph theme={theme}>
                 Now, I’m expanding and looking for new clients to work with,
                 because once everything that can be automated is taken care of,
                 it’s time to find new opportunities.
@@ -155,7 +162,7 @@ const About = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.2 }}
             >
-              <Paragraph>
+              <Paragraph theme={theme}>
                 My goal is to help businesses focus on what matters most by
                 leaving all the automation to me. I communicate effectively with
                 clients, and I don’t need complex technical specifications: with

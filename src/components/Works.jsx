@@ -1,122 +1,5 @@
-// import styled from "styled-components";
-// import Card from "./Card";
-
-// import img1 from "../assets/img/IMAGE.jpg";
-// import img2 from "../assets/img/IMAGE-3.jpg";
-// import img3 from "../assets/img/IMAGE-1.jpg";
-// import img4 from "../assets/img/IMAGE-4.jpg";
-// import img5 from "../assets/img/IMAGE-2.jpg";
-// import img6 from "../assets/img/IMAGE-5.jpg";
-
-// const WorksSection = styled.div`
-//   padding: 150px 0;
-// `;
-
-// const WorksTitle = styled.p`
-//   margin-bottom: 31px;
-//   letter-spacing: 0.6px;
-
-//   span {
-//     color: #757575;
-//   }
-// `;
-
-// const CardsContainer = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-
-//   @media (max-width: 1024px) {
-//     & {
-//       justify-content: center;
-//     }
-//   }
-
-//   @media (max-width: 768px) {
-//     & {
-//       gap: 15px;
-//       justify-content: center;
-//     }
-//   }
-// `;
-
-// const CardWrap = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 15px;
-// `;
-
-// const Works = () => {
-//   return (
-//     <WorksSection id="works">
-//       <CountContainer>
-//         <Counter value={100} duration={3} symbol="+">
-//           <span>Project</span>
-//         </Counter>
-//         <Counter value={3} duration={3}>
-//           <span>Scenarios and zaps</span>
-//         </Counter>
-//         <Counter value={1000} duration={3} symbol=">">
-//           <span>Experience</span>
-//         </Counter>
-//       </CountContainer>
-//       <WorksTitle>
-//         Featured work <span>· 2018–2022</span>
-//       </WorksTitle>
-//       <CardsContainer>
-//         <CardWrap>
-//           <Card
-//             height={true}
-//             imgPath={img1}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             direction={"left"}
-//           />
-
-//           <Card
-//             imgPath={img3}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             direction={"left"}
-//           />
-//           <Card
-//             imgPath={img2}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             direction={"left"}
-//           />
-//         </CardWrap>
-//         <CardWrap>
-//           <Card
-//             imgPath={img5}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             direction={"right"}
-//           />
-
-//           <Card
-//             imgPath={img4}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             direction={"right"}
-//           />
-//           <Card
-//             imgPath={img6}
-//             title={"Rule ratio"}
-//             text={"Product design"}
-//             height={true}
-//             direction={"right"}
-//           />
-//         </CardWrap>
-//       </CardsContainer>
-//     </WorksSection>
-//   );
-// };
-
-// export default Works;
-
 import Counter from "./ui/Count";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   FaSlack,
   FaTable,
@@ -126,30 +9,9 @@ import {
   FaDatabase,
   FaFacebook,
   FaCreditCard,
-  FaEnvelope,
-  FaVideo,
-  FaTrello,
-  FaShippingFast,
-  FaShoppingCart,
-  FaCalendarAlt,
-  FaShopify,
-  FaHubspot,
-  FaSalesforce,
-  FaInstagram,
-  FaTwitter,
-  FaStripe,
-  FaPaypal,
-  FaSquare,
-  FaGoogleDrive,
-  FaMicrosoft,
-  FaVimeo,
-  FaYoutube,
-  FaMailchimp,
-  FaCamera,
-  FaIntercom,
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import { Button } from "./ApisExp";
+import { useState } from "react";
+import generalStore from "../store/store";
 
 const ScenariosSection = styled.div`
   padding: 100px 0;
@@ -196,6 +58,15 @@ const ScenarioCardContainer = styled.div`
   transition: transform 0.3s ease;
   margin-bottom: 20px;
 
+  ${({ theme }) =>
+    theme == "dark"
+      ? css`
+          & {
+            background: var(--dark-card-bg);
+            color: var(--dark-text-primary);
+          }
+        `
+      : ""};
   &:hover {
     transform: translateY(-5px);
   }
@@ -216,8 +87,10 @@ const Title = styled.h3`
 
 const Description = styled.p`
   font-size: 14px;
-  color: #6c757d;
   margin-top: 5px;
+
+  ${({ theme }) =>
+    theme === "light" ? "var(--text-secondary)" : "var(--dark-text-secondary)"}
 `;
 
 const ModuleIcon = styled.div`
@@ -229,7 +102,8 @@ const ModuleIcon = styled.div`
 
 const ExtraScenarios = styled.div`
   font-size: 30px;
-  color: #6c757d;
+  ${({ theme }) =>
+    theme === "light" ? "var(--text-secondary)" : "var(--dark-text-secondary)"}
   display: flex;
   align-items: center;
   gap: 5px;
@@ -667,6 +541,7 @@ const scenarios = [
 ];
 
 const Scenarios = () => {
+  const { theme } = generalStore();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Количество элементов на одной странице
 
@@ -703,20 +578,20 @@ const Scenarios = () => {
       </ScenariosTitle>
       <CardsContainer>
         {currentScenarios.map((scenario, index) => (
-          <ScenarioCardContainer key={index}>
+          <ScenarioCardContainer key={index} theme={theme}>
             <ModuleContainer>
               {scenario.modules.map((module, i) => (
                 <ModuleIcon key={i}>{module}</ModuleIcon>
               ))}
               {scenario.extraScenariosCount > 0 && (
-                <ExtraScenarios>
+                <ExtraScenarios theme={theme}>
                   <FaEllipsisH />
                   <span>+{scenario.extraScenariosCount}</span>
                 </ExtraScenarios>
               )}
             </ModuleContainer>
             <Title>{scenario.name}</Title>
-            <Description>{scenario.description}</Description>
+            <Description theme={theme}>{scenario.description}</Description>
           </ScenarioCardContainer>
         ))}
       </CardsContainer>
@@ -726,6 +601,7 @@ const Scenarios = () => {
             key={number}
             onClick={() => paginate(number)}
             active={number === currentPage}
+            theme={theme}
           >
             {number}
           </PageNumber>
@@ -746,12 +622,35 @@ const PageNumber = styled.button`
   padding: 10px;
   margin: 0 5px;
   cursor: pointer;
-  background-color: ${({ active }) => (active ? "#007bff" : "#f0f0f0")};
-  color: ${({ active }) => (active ? "#fff" : "#000")};
   border: none;
   border-radius: 5px;
+
+  ${({ theme }) =>
+    theme == "dark"
+      ? css`
+          background: var(--dark-card-bg);
+          color: var(--dark-text-primary);
+        `
+      : ""};
+
+  ${({ theme, active }) => {
+    if (theme === "light" && active) {
+      return css`
+        background-color: #007bff;
+        color: #fff;
+      `;
+    }
+    if (theme === "dark" && active) {
+      return css`
+        background: #007bff;
+        color: var(--dark-text-primary);
+      `;
+    }
+  }}
+
   &:hover {
-    background-color: #007bff;
+    background-color: ${({ theme }) =>
+      theme === "light" ? "#007bff" : "#0a52a0"};
     color: #fff;
   }
 `;

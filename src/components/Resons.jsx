@@ -9,6 +9,7 @@ import ShieldIcon from "./icons/ShieldIcon";
 import HandsIcon from "./icons/HandsIcon";
 import CodeIcon from "./icons/CodeIcon";
 import { useState, useRef } from "react";
+import generalStore from "../store/store";
 
 const ResonContainer = styled.div`
   padding: 140px 0;
@@ -138,6 +139,7 @@ const accItems = [
 ];
 
 const Reason = () => {
+  const { theme } = generalStore();
   const [openIndex, setOpenIndex] = useState(null);
   const contentRefs = useRef([]);
 
@@ -146,10 +148,12 @@ const Reason = () => {
   };
 
   return (
-    <BackGround bg="#bcfdb9">
+    <BackGround bg="#bcfdb9" theme={theme}>
       <ResonContainer>
         <Container>
-          <Header2 style={{ paddingBottom: "100px" }}>Why Choose Me?</Header2>
+          <Header2 style={{ paddingBottom: "100px" }} theme={theme}>
+            Why Choose Me?
+          </Header2>
 
           <ReasonWrap
             variants={containerVariants}

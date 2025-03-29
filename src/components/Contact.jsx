@@ -1,38 +1,5 @@
 import styled from "styled-components";
-
-const ContactSection = styled.section`
-  padding: 128px 0;
-`;
-
-const ContactE = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 128px 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  background: #ffebd8;
-  border-radius: 15px;
-
-  a {
-    font-size: 37px;
-    color: #000;
-    text-decoration: none;
-    transition: 0.3s;
-
-    &:hover {
-      color: #464646;
-      transition: 0.3s;
-    }
-  }
-
-  @media (max-width: 768px) {
-    & a {
-      font-size: 16px;
-    }
-  }
-`;
+import { GradientBackground, Headline, Highlight } from "./Hero";
 
 const Header2 = styled.h2`
   margin: 0 auto;
@@ -58,16 +25,30 @@ const Header2 = styled.h2`
   }
 `;
 
+const EmailLink = styled.a`
+  text-decoration: none;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+`;
+
 const Contact = () => {
   return (
-    <ContactSection id="contact">
-      <ContactE>
-        <Header2>Want to create something awesome? Drop me an email.</Header2>
-        <a href="#">
-          <span>→</span> killhome2000@gmail.com
-        </a>
-      </ContactE>
-    </ContactSection>
+    <GradientBackground style={{ textAlign: "center" }} id="contact">
+      <Headline>
+        Want to create something <Highlight>awesome?</Highlight>
+        <span style={{ display: "block" }}>Drop me an email.</span>
+      </Headline>
+      <EmailLink>
+        <span>→</span> killhome2000@gmail.com
+      </EmailLink>
+    </GradientBackground>
   );
 };
 

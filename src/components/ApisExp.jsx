@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Container } from "../App";
 import { Header2 } from "./About";
+import generalStore from "../store/store";
 
 export const Button = styled.button`
   width: 100%;
@@ -26,13 +27,14 @@ export const Button = styled.button`
 `;
 
 export const BackGround = styled.div`
-  background: ${({ bg }) => bg && bg};
+  background: ${({ bg, theme }) =>
+    theme === "dark" ? "var(--dark-bg-secondary)" : bg};
 `;
 
 const ApisContainer = styled.div`
   display: flex;
   padding: 100px 0;
-  color: #fff;
+  color: var(--text-primary);
 
   @media (max-width: 768px) {
     & {
@@ -47,12 +49,11 @@ const ApisExpWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 40px;
   gap: 30px;
-
   ul {
-    width: 100%;
+    width: 50%;
     padding-right: 10px;
     border-right: 1px solid #f0f0f0;
-    text-align: left;
+    text-align: center;
   }
   ul:last-child {
     padding-right: 0;
@@ -62,6 +63,7 @@ const ApisExpWrapper = styled.div`
     margin-bottom: 10px;
     font-size: 24px;
     color: #525252;
+    list-style: none;
   }
 
   h2 {
@@ -100,6 +102,7 @@ const Wrapper = styled.div`
 `;
 
 const ApisExp = () => {
+  const { theme } = generalStore();
   const [page, setPage] = useState(0);
 
   const hendleClick = () => {
@@ -117,12 +120,10 @@ const ApisExp = () => {
       style={{ width: "100%" }}
       viewport={{ once: true, amount: 0.2 }}
     >
-      <BackGround bg="#8ca6f3">
+      <BackGround bg="#8ca6f3" theme={theme}>
         <Container>
           <ApisContainer>
-            <Header2>
-              APIs worked
-            </Header2>
+            <Header2 style={{color:'var(--dark-text-primary)'}}>APIs worked</Header2>
             <Wrapper>
               <ApisExpWrapper className="apis-wrapper">
                 <ul>
