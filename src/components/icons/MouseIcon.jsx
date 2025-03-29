@@ -1,7 +1,7 @@
-const MouseIcon = ({ width, height, click }) => {
+const MouseIcon = ({ width, height, click, theme }) => {
   return (
     <svg
-      fill="#000000"
+      fill={theme === "dark" ? "#fff" : "#000"}
       height={height ? `${height}px` : "30px"}
       width={width ? `${width}px` : "30px"}
       viewBox="0 0 512 512"

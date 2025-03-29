@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Container } from "../App";
 import MouseIcon from "./icons/MouseIcon";
 import React from "react";
+import generalStore from "../store/store";
 
 const gradient = keyframes`
   0% {
@@ -317,6 +318,8 @@ const Hero = () => {
   const targetY = useRef(0);
   const scrollY = useRef(0);
 
+  const { theme } = generalStore();
+
   useEffect(() => {
     const handleParallax = () => {
       scrollY.current = window.scrollY;
@@ -416,6 +419,7 @@ const Hero = () => {
                 height={40}
                 width={40}
                 click={() => scrollToSection("works")}
+                theme={theme}
               />
             </IconContainerCenter>
           </Container>
