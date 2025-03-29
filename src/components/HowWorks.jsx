@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Header2, Paragraph } from "./About";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { BackGround } from "./ApisExp";
 import { Container } from "../App";
+import generalStore from "../store/store";
 
 const ResonContainer = styled.div`
   padding: 140px 0;
@@ -29,8 +30,9 @@ const ReasonBlock = styled(motion.div)`
   margin-bottom: 20px;
   height: 100%;
   border-radius: 10px;
+  background: ${({ theme }) =>
+    theme === "dark" ? "var(--dark-card-bg)" : "--card-bg"};
 `;
-
 const ReasonContent = styled.div`
   p {
     letter-spacing: 1px;
@@ -84,11 +86,13 @@ const TitleWrapper = styled.div`
 `;
 
 const HowWorks = () => {
+  const { theme } = generalStore();
+
   return (
     <BackGround>
       <ResonContainer>
         <Container>
-          <Header2 style={{ paddingBottom: "100px" }}>
+          <Header2 style={{ paddingBottom: "100px" }} theme={theme}>
             HOW DOES IT WORKS
           </Header2>
 
@@ -98,24 +102,24 @@ const HowWorks = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <ReasonBlock variants={itemVariants}>
+            <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
-                  <Header2>01. Understanding Your Needs</Header2>
+                  <Header2 theme={theme}>01. Understanding Your Needs</Header2>
                 </TitleWrapper>
-                <Paragraph>
+                <Paragraph theme={theme}>
                   We start by discussing your business goals, current processes,
                   and pain points. Understanding your unique needs is crucial to
                   creating a tailored automation solution.
                 </Paragraph>
               </ReasonContent>
             </ReasonBlock>
-            <ReasonBlock variants={itemVariants}>
+            <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
-                  <Header2>02. Choosing the Right Tools</Header2>
+                  <Header2 theme={theme}>02. Choosing the Right Tools</Header2>
                 </TitleWrapper>
-                <Paragraph>
+                <Paragraph theme={theme}>
                   Based on your goals, we select the best tools for automating
                   your marketing, workflows, or any other business process. I
                   work with a wide range of platforms like Zapier, Make.com,
@@ -124,12 +128,12 @@ const HowWorks = () => {
                 </Paragraph>
               </ReasonContent>
             </ReasonBlock>
-            <ReasonBlock variants={itemVariants}>
+            <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
-                  <Header2>03. Building Your Automation</Header2>
+                  <Header2 theme={theme}>03. Building Your Automation</Header2>
                 </TitleWrapper>
-                <Paragraph>
+                <Paragraph theme={theme}>
                   Once we know what tools to use, I’ll create custom workflows
                   that automate repetitive tasks. Whether it’s setting up
                   marketing funnels, email campaigns, or CRM automation, I’ll
@@ -137,12 +141,12 @@ const HowWorks = () => {
                 </Paragraph>
               </ReasonContent>
             </ReasonBlock>
-            <ReasonBlock variants={itemVariants}>
+            <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
-                  <Header2>04. Integration and Testing</Header2>
+                  <Header2 theme={theme}>04. Integration and Testing</Header2>
                 </TitleWrapper>
-                <Paragraph>
+                <Paragraph theme={theme}>
                   After the automation is built, I’ll integrate it with your
                   existing systems and test everything to ensure smooth
                   functionality. If any adjustments are needed, they will be

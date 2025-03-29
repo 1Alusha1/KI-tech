@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Container } from "../App";
 import MouseIcon from "./icons/MouseIcon";
-import React from 'react';
+import React from "react";
 
 const gradient = keyframes`
   0% {
@@ -37,7 +37,7 @@ const glow = keyframes`
   }
 `;
 
-const GradientBackground = styled.div`
+export const GradientBackground = styled.div`
   position: relative;
   padding: 50px;
   width: 90%;
@@ -47,23 +47,23 @@ const GradientBackground = styled.div`
   margin: 30px auto;
   overflow: hidden;
   background: linear-gradient(
-    -45deg, 
-    #ee7752, 
-    #e73c7e, 
-    #9c27b0, 
-    #23a6d5, 
-    #23d5ab, 
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #9c27b0,
+    #23a6d5,
+    #23d5ab,
     #8bc34a,
-    #ee7752, 
-    #e73c7e, 
-    #9c27b0, 
-    #23a6d5, 
-    #23d5ab, 
+    #ee7752,
+    #e73c7e,
+    #9c27b0,
+    #23a6d5,
+    #23d5ab,
     #8bc34a
   );
   background-size: 200% 200%;
   animation: ${gradient} 20s ease infinite, ${glow} 20s ease infinite;
-  
+
   &::before {
     content: "";
     position: absolute;
@@ -79,7 +79,7 @@ const GradientBackground = styled.div`
   }
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -94,26 +94,26 @@ const ContentWrapper = styled.div`
   z-index: 2;
 `;
 
-const Headline = styled.div`
+export const Headline = styled.div`
   font-size: 5rem;
   font-weight: bold;
   color: white;
   margin-bottom: 1rem;
   line-height: 1.1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
-const Highlight = styled.span`
+export const Highlight = styled.span`
   color: #673ab7;
 `;
 
-const Tagline = styled.div`
+export const Tagline = styled.div`
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
 `;
 
-const ActionButtons = styled.div`
+export const ActionButtons = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -128,7 +128,7 @@ const Button = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
-  
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -144,7 +144,6 @@ const DarkButton = styled(Button)`
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
 `;
-
 
 const HeroContaier = styled.div`
   position: relative;
@@ -360,23 +359,32 @@ const Hero = () => {
         />
         <HeroContaier>
           <Container>
-          <GradientBackground>
-      <ContentWrapper>
-      <Headline>
-        We <Highlight>will</Highlight> create<br/>
-        any automation<br/>
-        for <Highlight>you</Highlight><br/>
-        </Headline>
-        <Tagline>
-          <b>That <Highlight>save your time and improve</Highlight> the quality of your bussiness operation<br/>
-          Ki-Tech</b>
-          </Tagline>
-        <ActionButtons>
-          <LightButton>Get your AI implementation plan in 24h</LightButton>
-          <DarkButton>Schedule Your AI Readiness Assessment</DarkButton>
-        </ActionButtons>
-      </ContentWrapper>
-    </GradientBackground>
+            <GradientBackground>
+              <ContentWrapper>
+                <Headline>
+                  We <Highlight>will</Highlight> create
+                  <br />
+                  any automation
+                  <br />
+                  for <Highlight>you</Highlight>
+                  <br />
+                </Headline>
+                <Tagline>
+                  <b>
+                    That <Highlight>save your time and improve</Highlight> the
+                    quality of your bussiness operation
+                    <br />
+                    Ki-Tech
+                  </b>
+                </Tagline>
+                <ActionButtons>
+                  <LightButton>
+                    Get your AI implementation plan in 24h
+                  </LightButton>
+                  <DarkButton>Schedule Your AI Readiness Assessment</DarkButton>
+                </ActionButtons>
+              </ContentWrapper>
+            </GradientBackground>
             <IconContainerCenter>
               <MouseIcon
                 height={40}

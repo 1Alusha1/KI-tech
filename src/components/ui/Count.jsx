@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import generalStore from "../../store/store";
 
 // Стилевые компоненты
 const UiCounter = styled.div`
@@ -8,6 +9,7 @@ const UiCounter = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: 48px;
+  color: ${({ theme }) => theme === 'dark' && 'var(--dark-text-primary)'};
 
   @media (max-width: 442px) {
     width: 100%;
@@ -23,6 +25,8 @@ const UiCounterChilren = styled.div`
 const easeOut = (t) => Math.pow(t - 1, 3) + 1;
 
 const Counter = ({ value, duration, symbol, children = null }) => {
+  const { theme } = generalStore();
+
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -67,7 +71,7 @@ const Counter = ({ value, duration, symbol, children = null }) => {
   }, [isVisible, value, duration]);
 
   return (
-    <UiCounter>
+    <UiCounter theme={theme}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}

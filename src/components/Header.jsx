@@ -1,7 +1,6 @@
-import { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { Container } from "../App";
+import styled, { css } from "styled-components";
 import img3 from "../assets/img/logo.png";
+import generalStore from "../store/store";
 
 const HeaderElem = styled.header`
   background-color: rgba(99, 27, 27, 0);
@@ -18,6 +17,15 @@ const HeaderElem = styled.header`
   z-index: 1000;
   margin: 0;
   width: 100%;
+
+  ${({ theme }) =>
+    theme === "light"
+      ? css`
+          background: #ffffff24;
+        `
+      : css`
+          background: #00000036;
+        `}
 `;
 
 const HeaderContent = styled.div`
@@ -35,7 +43,8 @@ const LogoContainer = styled.div`
 const Logo = styled.div`
   width: 80px;
   height: 40px;
-  
+  cursor: pointer;
+
   img {
     width: 100%;
     height: 100%;
@@ -48,6 +57,19 @@ const Nav = styled.nav`
   justify-content: center;
   flex: 1;
   margin: 0 2rem;
+
+  ${({ theme }) =>
+    theme === "light"
+      ? css`
+          li {
+            color: #000;
+          }
+        `
+      : css`
+          li {
+            color: #fff;
+          }
+        `}
 `;
 
 const List = styled.ul`
@@ -66,7 +88,7 @@ const List = styled.ul`
 const Li = styled.li`
   font-size: 1rem;
   list-style: none;
-  var(--text-primary);
+  /* var(--text-primary); */
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -74,7 +96,7 @@ const Li = styled.li`
     color: var(--accent-color);
   }
 `;
- 
+
 const GetStartedButton = styled.button`
   background-color: transparent;
   color: var(--text-primary);
@@ -90,26 +112,34 @@ const GetStartedButton = styled.button`
   letter-spacing: 1px;
   position: relative; /* Для создания анимации */
   overflow: hidden; /* Чтобы градиент не выходил за пределы кнопки */
+  ${({ theme }) =>
+    theme === "light"
+      ? css`
+          color: #000;
+        `
+      : css`
+          color: #fff;
+        `}
 
   &:hover {
-    var(--text-primary);
+    /* var(--text-primary); */
   }
 
   &:hover::before {
-    width: 300%; /* Увеличиваем ширину для эффекта перелива */
+    left: 0;
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
-    left: -100%;
+    left: -170px;
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, #ff6a00, #ffcc00, #00c6ff, #ff00d8);
-    transition: all 4.5s ease;
+    transition: all 2s ease;
     box-shadow: 0 0 10px 5px rgba(255, 0, 216, 0.66);
-    z-index: -1; 
+    z-index: -1;
   }
 
   &:focus {
@@ -117,8 +147,8 @@ const GetStartedButton = styled.button`
   }
 `;
 
-
 const Header = () => {
+  const { theme } = generalStore();
   const scrollToSection = (section) => {
     const targetElement = document.getElementById(section);
     if (targetElement) {
@@ -130,25 +160,22 @@ const Header = () => {
   };
 
   return (
-    <HeaderElem id="home">
+    <HeaderElem id="home" theme={theme}>
       <HeaderContent>
         <LogoContainer>
-          <Logo>
-            <img 
-              src={img3} 
-              alt="KI Tech Logo" 
-            />
+          <Logo onClick={() => scrollToSection("home")}>
+            <img src={img3} alt="KI Tech Logo" />
           </Logo>
         </LogoContainer>
-        <Nav>
+        <Nav theme={theme}>
           <List>
-            <Li onClick={() => scrollToSection("blog")}>Work</Li>
-            <Li onClick={() => scrollToSection("cases")}>About</Li>
-            <Li onClick={() => scrollToSection("tutorials")}>Contact</Li>
+            <Li onClick={() => scrollToSection("works")}>Work</Li>
+            <Li onClick={() => scrollToSection("about")}>About</Li>
+            <Li onClick={() => scrollToSection("contact")}>Contact</Li>
           </List>
         </Nav>
-        
-        <GetStartedButton>Get Started</GetStartedButton>
+
+        <GetStartedButton theme={theme}>Get Started</GetStartedButton>
       </HeaderContent>
     </HeaderElem>
   );
