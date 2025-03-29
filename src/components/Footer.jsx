@@ -9,6 +9,7 @@ const FooterE = styled.footer`
     display: flex;
     justify-content: center;
     gap: 32px;
+    padding-bottom: 20px;
 
     li {
       list-style: none;
@@ -20,7 +21,6 @@ const FooterE = styled.footer`
 
   @media (max-width: 768px) {
     ul {
-      padding-bottom: 20px;
       text-align: center;
     }
   }

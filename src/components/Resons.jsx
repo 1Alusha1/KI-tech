@@ -130,7 +130,7 @@ const accItems = [
   },
   {
     icon: <CodeIcon />,
-    title: "Optional",
+    title: "Simplicity",
     text: `With my extensive experience, I can easily convert your
                   requests into results, without requiring extensive technical
                   documentation. I understand how to get things done with

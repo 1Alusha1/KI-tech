@@ -21,6 +21,8 @@ const ScenariosTitle = styled.p`
   margin-bottom: 20px;
   letter-spacing: 0.6px;
 
+  color: ${({ theme }) =>
+    theme === "dark" ? "var(--dark-text-secondary)" : "var(--text-secondary)"};
   span {
     color: #757575;
   }
@@ -566,11 +568,11 @@ const Scenarios = () => {
         <Counter value={100} duration={3} symbol="+">
           <span>Project</span>
         </Counter>
-        <Counter value={3} duration={3}>
-          <span>Scenarios and zaps</span>
+        <Counter value={4} duration={3}>
+          <span>Years in business</span>
         </Counter>
         <Counter value={1000} duration={3} symbol=">">
-          <span>Experience</span>
+          <span>Scenarios</span>
         </Counter>
       </CountContainer>
       <ScenariosTitle>
