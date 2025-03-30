@@ -16,7 +16,7 @@ const Burger = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 1001;
+  z-index: 4;
   top: 20px;
   right: 80px;
   width: 45.5px;

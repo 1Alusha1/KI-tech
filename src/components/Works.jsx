@@ -168,17 +168,19 @@ const Modal = ({ scenario, onClose }) => {
         <h2 style={{ fontSize: "18px", textAlign: "center" }}>
           {scenario.name}
         </h2>
-        <img
-          src={scenario.image}
-          alt={scenario.name}
-          style={{
-            width: "100%",
-            borderRadius: "10px",
-            marginBottom: "10px",
-            maxHeight: "250px",
-            objectFit: "cover",
-          }}
-        />
+        {scenario.image.map((img) => (
+          <img
+            src={img}
+            alt={scenario.name}
+            style={{
+              width: "100%",
+              borderRadius: "10px",
+              marginBottom: "10px",
+              maxHeight: "250px",
+              objectFit: "cover",
+            }}
+          />
+        ))}
         <p style={{ fontSize: "14px", textAlign: "justify" }}>
           {scenario.fullDescription}
         </p>
@@ -198,7 +200,7 @@ const scenarios = [
       <FaSlack />, // Иконка Slack
     ],
     fullDescription: "lorem 12312",
-    image: scenario,
+    image: [scenario],
     extraScenariosCount: 3,
   },
   {
@@ -211,7 +213,7 @@ const scenarios = [
       <FaSlack />, // Иконка Slack
     ],
     fullDescription: "lorem 12312",
-    image: scenario,
+    image: [scenario, scenario, scenario],
     extraScenariosCount: 3,
   },
 ];
