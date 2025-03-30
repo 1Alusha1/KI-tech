@@ -144,7 +144,7 @@ export const Tagline = styled.div`
   @media (max-width: 425px) {
     & {
       width: 100%;
-      font-size: 10px;
+      font-size: 14px;
     }
   }
 `;

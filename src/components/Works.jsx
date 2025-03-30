@@ -10,6 +10,9 @@ import {
   FaFacebook,
   FaCreditCard,
 } from "react-icons/fa";
+
+import scenario from "../assets/img/scenario.jpg";
+
 import { useState } from "react";
 import generalStore from "../store/store";
 
@@ -115,6 +118,75 @@ const ExtraScenarios = styled.div`
   }
 `;
 
+const Modal = ({ scenario, onClose }) => {
+  if (!scenario) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "rgba(0,0,0,0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+        padding: "20px",
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{
+          background: "#fff",
+          padding: "20px",
+          borderRadius: "10px",
+          width: "90vw",
+          maxWidth: "400px",
+          maxHeight: "80vh",
+          overflow: "auto",
+          position: "relative",
+        }}
+        onClick={(e) => e.stopPropagation()} // Чтобы клик внутри окна не закрывал его
+      >
+        <button
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            border: "none",
+            background: "transparent",
+            fontSize: "20px",
+            cursor: "pointer",
+          }}
+          onClick={onClose}
+        >
+          ×
+        </button>
+        <h2 style={{ fontSize: "18px", textAlign: "center" }}>
+          {scenario.name}
+        </h2>
+        <img
+          src={scenario.image}
+          alt={scenario.name}
+          style={{
+            width: "100%",
+            borderRadius: "10px",
+            marginBottom: "10px",
+            maxHeight: "250px",
+            objectFit: "cover",
+          }}
+        />
+        <p style={{ fontSize: "14px", textAlign: "justify" }}>
+          {scenario.fullDescription}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const scenarios = [
   {
     name: "Migrate Data",
@@ -125,101 +197,8 @@ const scenarios = [
       <FaTable />, // Иконка Airtable
       <FaSlack />, // Иконка Slack
     ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Sync CRM Data",
-    description:
-      "Sync and manage customer data between various platforms like Google Sheets and CRM systems.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaSyncAlt />, // Иконка для синхронизации данных
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Team Notification",
-    description:
-      "Send notifications to your team via Slack when certain events happen in your system.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaGoogle />, // Иконка для связи с Google или другими сервисами
-    ],
-    extraScenariosCount: 5,
-  },
-  {
-    name: "Sales Lead Automation",
-    description:
-      "Automatically capture and manage leads through Google Sheets, Pipedrive, and Slack.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Pipedrive
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Order Processing",
-    description:
-      "Sync e-commerce orders from WooCommerce and Shopify into a centralized Google Sheets.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка WooCommerce
-      <FaDatabase />, // Иконка для базы данных
-    ],
-    extraScenariosCount: 4,
-  },
-  {
-    name: "Social Media Analytics",
-    description:
-      "Sync Facebook Marketing data with Google Analytics to track and optimize campaigns.",
-    modules: [
-      <FaFacebook />, // Иконка Facebook Marketing
-      <FaGoogle />, // Иконка Google Analytics
-    ],
-    extraScenariosCount: 1,
-  },
-  {
-    name: "Customer Support Automation",
-    description:
-      "Automate customer service workflows with Zendesk and Intercom APIs.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaTable />, // Иконка Zendesk
-      <FaDatabase />, // Иконка Intercom
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Data Backup",
-    description:
-      "Automate backups of Google Sheets and other cloud storage services with AWS Lambda.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка AWS Lambda
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Automated Marketing Campaigns",
-    description:
-      "Sync marketing data across Klaviyo, Google Sheets, and Facebook Marketing for automated campaigns.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Klaviyo
-      <FaFacebook />, // Иконка Facebook Marketing
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Invoice Automation",
-    description:
-      "Sync invoice data between QuickFile API, Stripe, and Google Sheets for automatic updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка QuickFile API
-      <FaCreditCard />, // Иконка Stripe
-    ],
+    fullDescription: "lorem 12312",
+    image: scenario,
     extraScenariosCount: 3,
   },
   {
@@ -231,313 +210,8 @@ const scenarios = [
       <FaTable />, // Иконка Airtable
       <FaSlack />, // Иконка Slack
     ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Sync CRM Data",
-    description:
-      "Sync and manage customer data between various platforms like Google Sheets and CRM systems.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaSyncAlt />, // Иконка для синхронизации данных
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Team Notification",
-    description:
-      "Send notifications to your team via Slack when certain events happen in your system.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaGoogle />, // Иконка для связи с Google или другими сервисами
-    ],
-    extraScenariosCount: 5,
-  },
-  {
-    name: "Sales Lead Automation",
-    description:
-      "Automatically capture and manage leads through Google Sheets, Pipedrive, and Slack.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Pipedrive
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Order Processing",
-    description:
-      "Sync e-commerce orders from WooCommerce and Shopify into a centralized Google Sheets.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка WooCommerce
-      <FaDatabase />, // Иконка для базы данных
-    ],
-    extraScenariosCount: 4,
-  },
-  {
-    name: "Social Media Analytics",
-    description:
-      "Sync Facebook Marketing data with Google Analytics to track and optimize campaigns.",
-    modules: [
-      <FaFacebook />, // Иконка Facebook Marketing
-      <FaGoogle />, // Иконка Google Analytics
-    ],
-    extraScenariosCount: 1,
-  },
-  {
-    name: "Customer Support Automation",
-    description:
-      "Automate customer service workflows with Zendesk and Intercom APIs.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaTable />, // Иконка Zendesk
-      <FaDatabase />, // Иконка Intercom
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Data Backup",
-    description:
-      "Automate backups of Google Sheets and other cloud storage services with AWS Lambda.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка AWS Lambda
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Automated Marketing Campaigns",
-    description:
-      "Sync marketing data across Klaviyo, Google Sheets, and Facebook Marketing for automated campaigns.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Klaviyo
-      <FaFacebook />, // Иконка Facebook Marketing
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Invoice Automation",
-    description:
-      "Sync invoice data between QuickFile API, Stripe, and Google Sheets for automatic updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка QuickFile API
-      <FaCreditCard />, // Иконка Stripe
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Migrate Data",
-    description:
-      "Migrate data between Google Sheets, Airtable, and Slack. Automatically sync and notify team members of updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Airtable
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Sync CRM Data",
-    description:
-      "Sync and manage customer data between various platforms like Google Sheets and CRM systems.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaSyncAlt />, // Иконка для синхронизации данных
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Team Notification",
-    description:
-      "Send notifications to your team via Slack when certain events happen in your system.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaGoogle />, // Иконка для связи с Google или другими сервисами
-    ],
-    extraScenariosCount: 5,
-  },
-  {
-    name: "Sales Lead Automation",
-    description:
-      "Automatically capture and manage leads through Google Sheets, Pipedrive, and Slack.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Pipedrive
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Order Processing",
-    description:
-      "Sync e-commerce orders from WooCommerce and Shopify into a centralized Google Sheets.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка WooCommerce
-      <FaDatabase />, // Иконка для базы данных
-    ],
-    extraScenariosCount: 4,
-  },
-  {
-    name: "Social Media Analytics",
-    description:
-      "Sync Facebook Marketing data with Google Analytics to track and optimize campaigns.",
-    modules: [
-      <FaFacebook />, // Иконка Facebook Marketing
-      <FaGoogle />, // Иконка Google Analytics
-    ],
-    extraScenariosCount: 1,
-  },
-  {
-    name: "Customer Support Automation",
-    description:
-      "Automate customer service workflows with Zendesk and Intercom APIs.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaTable />, // Иконка Zendesk
-      <FaDatabase />, // Иконка Intercom
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Data Backup",
-    description:
-      "Automate backups of Google Sheets and other cloud storage services with AWS Lambda.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка AWS Lambda
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Automated Marketing Campaigns",
-    description:
-      "Sync marketing data across Klaviyo, Google Sheets, and Facebook Marketing for automated campaigns.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Klaviyo
-      <FaFacebook />, // Иконка Facebook Marketing
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Invoice Automation",
-    description:
-      "Sync invoice data between QuickFile API, Stripe, and Google Sheets for automatic updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка QuickFile API
-      <FaCreditCard />, // Иконка Stripe
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Migrate Data",
-    description:
-      "Migrate data between Google Sheets, Airtable, and Slack. Automatically sync and notify team members of updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Airtable
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Sync CRM Data",
-    description:
-      "Sync and manage customer data between various platforms like Google Sheets and CRM systems.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaSyncAlt />, // Иконка для синхронизации данных
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Team Notification",
-    description:
-      "Send notifications to your team via Slack when certain events happen in your system.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaGoogle />, // Иконка для связи с Google или другими сервисами
-    ],
-    extraScenariosCount: 5,
-  },
-  {
-    name: "Sales Lead Automation",
-    description:
-      "Automatically capture and manage leads through Google Sheets, Pipedrive, and Slack.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Pipedrive
-      <FaSlack />, // Иконка Slack
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Order Processing",
-    description:
-      "Sync e-commerce orders from WooCommerce and Shopify into a centralized Google Sheets.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка WooCommerce
-      <FaDatabase />, // Иконка для базы данных
-    ],
-    extraScenariosCount: 4,
-  },
-  {
-    name: "Social Media Analytics",
-    description:
-      "Sync Facebook Marketing data with Google Analytics to track and optimize campaigns.",
-    modules: [
-      <FaFacebook />, // Иконка Facebook Marketing
-      <FaGoogle />, // Иконка Google Analytics
-    ],
-    extraScenariosCount: 1,
-  },
-  {
-    name: "Customer Support Automation",
-    description:
-      "Automate customer service workflows with Zendesk and Intercom APIs.",
-    modules: [
-      <FaSlack />, // Иконка Slack
-      <FaTable />, // Иконка Zendesk
-      <FaDatabase />, // Иконка Intercom
-    ],
-    extraScenariosCount: 3,
-  },
-  {
-    name: "Data Backup",
-    description:
-      "Automate backups of Google Sheets and other cloud storage services with AWS Lambda.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка AWS Lambda
-    ],
-    extraScenariosCount: 0,
-  },
-  {
-    name: "Automated Marketing Campaigns",
-    description:
-      "Sync marketing data across Klaviyo, Google Sheets, and Facebook Marketing for automated campaigns.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaTable />, // Иконка Klaviyo
-      <FaFacebook />, // Иконка Facebook Marketing
-    ],
-    extraScenariosCount: 2,
-  },
-  {
-    name: "Invoice Automation",
-    description:
-      "Sync invoice data between QuickFile API, Stripe, and Google Sheets for automatic updates.",
-    modules: [
-      <FaGoogle />, // Иконка Google Sheets
-      <FaDatabase />, // Иконка QuickFile API
-      <FaCreditCard />, // Иконка Stripe
-    ],
+    fullDescription: "lorem 12312",
+    image: scenario,
     extraScenariosCount: 3,
   },
 ];
@@ -545,6 +219,7 @@ const scenarios = [
 const Scenarios = () => {
   const { theme } = generalStore();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedScenario, setSelectedScenario] = useState(null);
   const itemsPerPage = 10; // Количество элементов на одной странице
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -561,6 +236,10 @@ const Scenarios = () => {
   for (let i = 1; i <= Math.ceil(scenarios.length / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
+
+  const handleCardClick = (scenario) => {
+    setSelectedScenario(scenario);
+  };
 
   return (
     <ScenariosSection id="works">
@@ -580,7 +259,11 @@ const Scenarios = () => {
       </ScenariosTitle>
       <CardsContainer>
         {currentScenarios.map((scenario, index) => (
-          <ScenarioCardContainer key={index} theme={theme}>
+          <ScenarioCardContainer
+            key={index}
+            theme={theme}
+            onClick={() => handleCardClick(scenario)}
+          >
             <ModuleContainer>
               {scenario.modules.map((module, i) => (
                 <ModuleIcon key={i}>{module}</ModuleIcon>
@@ -596,6 +279,12 @@ const Scenarios = () => {
             <Description theme={theme}>{scenario.description}</Description>
           </ScenarioCardContainer>
         ))}
+        {selectedScenario && (
+          <Modal
+            scenario={selectedScenario}
+            onClose={() => setSelectedScenario(null)}
+          />
+        )}
       </CardsContainer>
       <Pagination>
         {pageNumbers.map((number) => (
