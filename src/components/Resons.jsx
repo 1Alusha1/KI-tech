@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Header2, Paragraph } from "./About";
+import { Header2, Paragraph } from "./styles/CommonStyles";
 import { motion } from "framer-motion";
 import { BackGround } from "./ApisExp";
 import { Container } from "../App";
@@ -113,7 +113,7 @@ const accItems = [
                   implement best practices for data protection and ensure that
                   all processes are compliant with relevant regulations. From
                   secure API integrations to safe data handling, I work to
-                  ensure that your business’s sensitive information is always
+                  ensure that your business's sensitive information is always
                   protected. You can trust that your systems and data are in
                   safe hands with me.`,
   },
@@ -148,10 +148,10 @@ const Reason = () => {
   };
 
   return (
-    <BackGround bg="#bcfdb9" theme={theme}>
+    <BackGround bg="#dce1ff" theme={theme}>
       <ResonContainer>
         <Container>
-          <Header2 style={{ paddingBottom: "100px" }} theme={theme}>
+          <Header2 style={{ paddingBottom: "100px", textAlign: "center", width: "100%" }} theme={theme}>
             Why Choose Me?
           </Header2>
 

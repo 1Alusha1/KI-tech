@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
 import { Container } from "../App";
-import { Header2 } from "./About";
+import { Header2 } from "./styles/CommonStyles";
 import generalStore from "../store/store";
 
 export const Button = styled.button`
@@ -18,6 +18,7 @@ export const Button = styled.button`
   border-radius: 30px;
   transition: all 0.3s ease;
   outline: none;
+  margin-top: 30px;
 
   &:hover {
     background: #fff;
@@ -32,86 +33,84 @@ export const BackGround = styled.div`
 `;
 
 const ApisContainer = styled.div`
-  display: flex;
   padding: 100px 0;
   color: var(--text-primary);
+`;
 
+const ApiGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
   @media (max-width: 768px) {
-    & {
-      flex-direction: column;
-      gap: 20px;
-    }
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const ApisExpWrapper = styled.div`
+const ApiItem = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
-  gap: 30px;
-  ul {
-    width: 50%;
-    padding-right: 10px;
-    border-right: 1px solid #f0f0f0;
-    text-align: center;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
   }
-  ul:last-child {
-    padding-right: 0;
-    border-right: none;
+  
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
   }
-  li {
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #525252;
-    list-style: none;
-  }
-
-  h2 {
-    margin-bottom: 40px;
-  }
-
-  li {
-    color: #fff;
-  }
-
-  @media (max-width: 768px) {
-    & {
-      flex-direction: column;
-      align-items: center;
-
-      ul {
-        padding-right: 0;
-        padding-bottom: 30px;
-        border-right: none;
-        border-bottom: 1px solid #f0f0f0;
-        li {
-          text-align: center;
-        }
-      }
-    }
-  }
-  @media (max-width: 425px) {
-    ul {
-      width: 100%;
-    }
-  }
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
 `;
 
 const ApisExp = () => {
   const { theme } = generalStore();
-  const [page, setPage] = useState(0);
+  const [showMore, setShowMore] = useState(false);
+  
+  const apis = [
+    // Page 1
+    "HubSpot API", "ActiveCampaign", "OPENAI API", "Make.com API", 
+    "Google Analytics", "Salesforce API", "MONDAY API", "Facebook Marketing",
+    "GHL API", "Airtable API", "Asana API", "Slack API", 
+    "Zoom API", "Intercom API",
+    
+    // Page 2
+    "Twilio API", "Shopify API", "Stripe API", "WooCommerce API",
+    "Google Sheets API", "Trello API", "ClickFunnels API", "Notion API",
+    "Klaviyo API", "Zendesk API", "Calendly API", "GCF API",
+    "AWS Lambda API", "SurveyMonkey API",
+    
+    // Page 3
+    "Pipedrive API", "Google Drive API", "BigCommerce API", "ClickUp API",
+    "Pandadoc API", "Typeform API", "Sage One API", "QuickFile API",
+    "Github API", "Stripe API", "Slackbto API", "Vimeo API",
+    "MP BI API", "GitLab API"
+  ];
+  
+  const displayedApis = showMore ? apis : apis.slice(0, 16);
 
-  const hendleClick = () => {
-    if (page === 4) {
-      return;
-    }
-
-    setPage((prev) => prev + 1);
-  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -123,93 +122,29 @@ const ApisExp = () => {
       <BackGround bg="#8ca6f3" theme={theme}>
         <Container>
           <ApisContainer>
-            <Header2 style={{color:'var(--dark-text-primary)'}}>APIs worked</Header2>
-            <Wrapper>
-              <ApisExpWrapper className="apis-wrapper">
-                <ul>
-                  <li>HubSpot API</li>
-                  <li>ActiveCampaign</li>
-                  <li>OPENAI API</li>
-                  <li>Make.com API</li>
-                  <li>Google Analytics</li>
-                  <li>Salesforce API</li>
-                  <li>MONDAY API</li>
-                </ul>
-                <ul>
-                  <li>Facebook Marketing</li>
-                  <li>GHL API</li>
-                  <li>Airtable API</li>
-                  <li>Asana API</li>
-                  <li>Slack API</li>
-                  <li>Zoom API</li>
-                  <li>Intercom API</li>
-                </ul>
-              </ApisExpWrapper>
-              {page === 0 && <Button onClick={hendleClick}>Show more</Button>}
-
-              {page >= 1 && (
+            <Header2 style={{ color: 'var(--dark-text-primary)', textAlign: 'center' }}>APIs We've Worked With</Header2>
+            
+            <ApiGrid>
+              {displayedApis.map((api, index) => (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                  style={{ width: "100%" }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.5,
+                    delay: index * 0.05
+                  }}
                 >
-                  <ApisExpWrapper className="apis-wrapper">
-                    <ul>
-                      <li>Twilio API</li>
-                      <li>Shopify API</li>
-                      <li>Stripe API</li>
-                      <li>WooCommerce API</li>
-                      <li>Google Sheets API</li>
-                      <li>Trello API</li>
-                      <li>ClickFunnels API</li>
-                    </ul>
-                    <ul>
-                      <li>Notion API</li>
-                      <li>Klaviyo API</li>
-                      <li>Zendesk API</li>
-                      <li>Calendly API</li>
-                      <li>GCF API</li>
-                      <li>AWS Lambda API</li>
-                      <li>SurveyMonkey API</li>
-                    </ul>
-                  </ApisExpWrapper>
+                  <ApiItem>
+                    <p>{api}</p>
+                  </ApiItem>
                 </motion.div>
-              )}
-              {page === 1 && <Button onClick={hendleClick}>Show more</Button>}
-
-              {page >= 2 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                  style={{ width: "100%" }}
-                  viewport={{ once: true, amount: 0.2 }}
-                >
-                  <ApisExpWrapper className="apis-wrapper">
-                    <ul>
-                      <li>Pipedrive API</li>
-                      <li>Google Drive API</li>
-                      <li>BigCommerce API</li>
-                      <li>ClickUp API</li>
-                      <li>Pandadoc API</li>
-                      <li>Typeform API</li>
-                      <li>Sage One API</li>
-                    </ul>
-                    <ul>
-                      <li>QuickFile API</li>
-                      <li>Github API</li>
-                      <li>Stripe API</li>
-                      <li>Slackbto API</li>
-                      <li>Vimeo API</li>
-                      <li>MP BI API</li>
-                      <li>GitLab API</li>
-                    </ul>
-                  </ApisExpWrapper>
-                </motion.div>
-              )}
-            </Wrapper>
+              ))}
+            </ApiGrid>
+            
+            {!showMore && (
+              <Button onClick={() => setShowMore(true)}>Show More APIs</Button>
+            )}
           </ApisContainer>
         </Container>
       </BackGround>

@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { Header2, Paragraph } from "./About";
+import { Header2, Paragraph } from "./styles/CommonStyles";
 import { color, motion } from "framer-motion";
 import { BackGround } from "./ApisExp";
 import { Container } from "../App";
 import generalStore from "../store/store";
+import NeedsIcon from "./icons/NeedsIcon";
+import ToolsIcon from "./icons/ToolsIcon";
+import BuildIcon from "./icons/BuildIcon";
+import TestIcon from "./icons/TestIcon";
 
 const ResonContainer = styled.div`
   padding: 140px 0;
@@ -25,13 +29,23 @@ const ReasonWrap = styled(motion.div)`
 `;
 
 const ReasonBlock = styled(motion.div)`
-  box-shadow: -1px 1px 9px 0px #000;
-  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
   margin-bottom: 20px;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 16px;
   background: ${({ theme }) =>
-    theme === "dark" ? "var(--dark-card-bg)" : "--card-bg"};
+    theme === "dark" 
+      ? "linear-gradient(135deg, var(--dark-card-bg), #2a2438)" 
+      : "linear-gradient(135deg, white, #f8f7ff)"};
+  border: 1px solid ${({ theme }) =>
+    theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(140, 166, 243, 0.2)"};
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
 `;
 const ReasonContent = styled.div`
   p {
@@ -89,11 +103,11 @@ const HowWorks = () => {
   const { theme } = generalStore();
 
   return (
-    <BackGround>
+    <BackGround bg="#f0e6ff" theme={theme}>
       <ResonContainer>
         <Container>
-          <Header2 style={{ paddingBottom: "100px" }} theme={theme}>
-            HOW DOES IT WORKS
+          <Header2 style={{ paddingBottom: "100px", textAlign: "center", width: "100%" }} theme={theme}>
+            HOW DOES IT WORK
           </Header2>
 
           <ReasonWrap
@@ -105,6 +119,7 @@ const HowWorks = () => {
             <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
+                  <NeedsIcon />
                   <Header2 theme={theme}>01. Understanding Your Needs</Header2>
                 </TitleWrapper>
                 <Paragraph theme={theme}>
@@ -117,6 +132,7 @@ const HowWorks = () => {
             <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
+                  <ToolsIcon />
                   <Header2 theme={theme}>02. Choosing the Right Tools</Header2>
                 </TitleWrapper>
                 <Paragraph theme={theme}>
@@ -131,12 +147,13 @@ const HowWorks = () => {
             <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
+                  <BuildIcon />
                   <Header2 theme={theme}>03. Building Your Automation</Header2>
                 </TitleWrapper>
                 <Paragraph theme={theme}>
-                  Once we know what tools to use, I’ll create custom workflows
-                  that automate repetitive tasks. Whether it’s setting up
-                  marketing funnels, email campaigns, or CRM automation, I’ll
+                  Once we know what tools to use, I'll create custom workflows
+                  that automate repetitive tasks. Whether it's setting up
+                  marketing funnels, email campaigns, or CRM automation, I'll
                   make sure everything runs seamlessly in the background.
                 </Paragraph>
               </ReasonContent>
@@ -144,10 +161,11 @@ const HowWorks = () => {
             <ReasonBlock variants={itemVariants} theme={theme}>
               <ReasonContent>
                 <TitleWrapper>
+                  <TestIcon />
                   <Header2 theme={theme}>04. Integration and Testing</Header2>
                 </TitleWrapper>
                 <Paragraph theme={theme}>
-                  After the automation is built, I’ll integrate it with your
+                  After the automation is built, I'll integrate it with your
                   existing systems and test everything to ensure smooth
                   functionality. If any adjustments are needed, they will be
                   made to ensure the system works perfectly for your business.

@@ -6,33 +6,34 @@ const HeaderElem = styled.header`
   background-color: rgba(99, 27, 27, 0);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
-  border-radius: 15px;
+  border-radius: 16px;
   margin: 1rem auto;
-  max-width: 1024px;
-  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.15);
+  max-width: 1200px;
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.1);
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   margin: 0;
-  width: 100%;
+  width: 92%;
 
   ${({ theme }) =>
     theme === "light"
       ? css`
-          background: #ffffff24;
+          background: rgba(255, 255, 255, 0.15);
         `
       : css`
-          background: #00000036;
+          background: rgba(15, 23, 42, 0.75);
         `}
 
-  @media (max-width: 1024px) {
-    max-width: 768px;
+  @media (max-width: 1200px) {
+    max-width: 90%;
   }
 
   @media (max-width: 768px) {
-    border-radius: 0px;
+    border-radius: 0;
+    width: 100%;
     height: ${({ burger }) => burger && "100%"};
     ${({ burger }) =>
       burger &&
@@ -46,7 +47,7 @@ const HeaderElem = styled.header`
           height: 100%;
           background-color: rgba(99, 27, 27, 0);
           backdrop-filter: blur(10px);
-          box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.1);
           z-index: 1;
         }
       `}
@@ -61,7 +62,7 @@ const HeaderContent = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: ${({ burger }) => burger && "20px"};
+    gap: ${({ burger }) => burger && "30px"};
   }
 `;
 
@@ -71,9 +72,14 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 80px;
-  height: 40px;
+  width: 100px;
+  height: 50px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
 
   img {
     width: 100%;
@@ -83,6 +89,8 @@ const Logo = styled.div`
 
   @media (max-width: 768px) {
     z-index: 3;
+    width: 80px;
+    height: 40px;
   }
 `;
 
@@ -96,12 +104,12 @@ const Nav = styled.nav`
     theme === "light"
       ? css`
           li {
-            color: #000;
+            color: #0f172a;
           }
         `
       : css`
           li {
-            color: #fff;
+            color: #f1f5f9;
           }
         `}
 `;
@@ -110,19 +118,19 @@ const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   margin: 0;
   padding: 0;
   z-index: 3;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 
     ${({ burger }) =>
       burger
         ? css`
-            height: 200px;
+            height: 250px;
             transition: 0.5s;
             overflow: hidden;
           `
@@ -135,61 +143,57 @@ const List = styled.ul`
 `;
 
 const Li = styled.li`
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   list-style: none;
-  /* var(--text-primary); */
   cursor: pointer;
   transition: all 0.3s ease;
-
+  position: relative;
+  padding: 5px 0;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.5s ease;
+  }
+  
   &:hover {
     color: var(--accent-color);
+  }
+  
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
 `;
 
 const GetStartedButton = styled.button`
-  background-color: transparent;
-  color: var(--text-primary);
-  border: 1px solid #333;
-  padding: 0.5rem 1.25rem;
-  font-weight: 300;
-  font-size: 1rem;
-  box-shadow: 0 0 10px 5px rgba(102, 100, 102, 0.16);
+  background: linear-gradient(135deg, #7e22ce, #a855f7, #c026d3);
+  background-size: 200% auto;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 15px rgba(126, 34, 206, 0.3);
   cursor: pointer;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative; /* Для создания анимации */
-  overflow: hidden; /* Чтобы градиент не выходил за пределы кнопки */
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
   z-index: 3;
-  ${({ theme }) =>
-    theme === "light"
-      ? css`
-          color: #000;
-        `
-      : css`
-          color: #fff;
-        `}
-
+  
   &:hover {
-    /* var(--text-primary); */
-  }
-
-  &:hover::before {
-    left: 0;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -170px;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ff6a00, #ffcc00, #00c6ff, #ff00d8);
-    transition: all 2s ease;
-    box-shadow: 0 0 10px 5px rgba(255, 0, 216, 0.66);
-    z-index: -1;
+    background-position: right center;
+    box-shadow: 0 8px 20px rgba(126, 34, 206, 0.4);
+    transform: translateY(-3px);
   }
 
   &:focus {
@@ -221,18 +225,22 @@ const Header = () => {
       <HeaderContent>
         <LogoContainer>
           <Logo onClick={() => scrollToSection("home")}>
-            <img src={img3} alt="KI Tech Logo" />
+            <img src={img3} alt="KI-Tech Logo" />
           </Logo>
         </LogoContainer>
         <Nav theme={theme}>
           <List burger={burger}>
-            <Li onClick={() => scrollToSection("works")}>Work</Li>
+            <Li onClick={() => scrollToSection("works")}>Services</Li>
             <Li onClick={() => scrollToSection("about")}>About</Li>
             <Li onClick={() => scrollToSection("contact")}>Contact</Li>
           </List>
         </Nav>
-        <GetStartedButton theme={theme} burger={burger}>
-          Get Started
+        <GetStartedButton 
+          theme={theme} 
+          burger={burger} 
+          onClick={() => scrollToSection("contact")}
+        >
+          Start Project
         </GetStartedButton>
       </HeaderContent>
     </HeaderElem>
